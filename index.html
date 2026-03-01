@@ -2,11 +2,10 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Service Temporarily Unavailable</title>
+    <title>Service Unavailable</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
-    <!-- Google Font -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 
     <style>
         * {
@@ -17,57 +16,60 @@
 
         body {
             font-family: 'Inter', sans-serif;
-            background: linear-gradient(135deg, #0f172a, #1e293b);
-            color: #e2e8f0;
+            background: linear-gradient(135deg, #0f172a, #111827);
+            color: #e5e7eb;
             height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
-            text-align: center;
         }
 
-        .container {
+        .wrapper {
+            text-align: center;
             max-width: 600px;
             padding: 40px;
         }
 
-        .status-icon {
-            font-size: 60px;
-            margin-bottom: 20px;
-            animation: pulse 2s infinite;
+        .status-line {
+            width: 60px;
+            height: 3px;
+            background-color: #3b82f6;
+            margin: 0 auto 30px auto;
+            border-radius: 3px;
         }
 
         h1 {
-            font-weight: 600;
             font-size: 32px;
-            margin-bottom: 15px;
+            font-weight: 600;
+            margin-bottom: 20px;
         }
 
         p {
+            font-size: 17px;
             font-weight: 300;
-            font-size: 18px;
             line-height: 1.6;
             color: #cbd5e1;
         }
 
-        .divider {
-            width: 60px;
-            height: 3px;
-            background: #38bdf8;
-            margin: 30px auto;
-            border-radius: 5px;
+        .loader {
+            margin: 40px auto 0 auto;
+            width: 40px;
+            height: 40px;
+            border: 3px solid rgba(255, 255, 255, 0.1);
+            border-top: 3px solid #3b82f6;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
         }
 
         .footer {
-            margin-top: 40px;
+            margin-top: 50px;
             font-size: 14px;
-            color: #94a3b8;
+            color: #9ca3af;
         }
 
-        @keyframes pulse {
-            0% { opacity: 0.6; }
-            50% { opacity: 1; }
-            100% { opacity: 0.6; }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
         }
 
         @media (max-width: 600px) {
@@ -83,26 +85,27 @@
 </head>
 <body>
 
-    <div class="container">
-        <div class="status-icon">⚙️</div>
+    <div class="wrapper">
 
-        <h1>We'll Be Back Shortly</h1>
+        <div class="status-line"></div>
 
-        <div class="divider"></div>
+        <h1>Service Temporarily Unavailable</h1>
 
         <p>
-            Our website is currently undergoing maintenance and is temporarily unavailable.  
-            We're working behind the scenes to restore full functionality as quickly as possible.
+            Our website is currently offline due to scheduled maintenance.
+            We are working to restore full access as quickly and efficiently as possible.
         </p>
 
         <p style="margin-top:15px;">
-            Please check back in a little while.  
-            We appreciate your patience and understanding.
+            Please check back shortly. Thank you for your patience.
         </p>
 
+        <div class="loader"></div>
+
         <div class="footer">
-            © 2026 Your Company Name
+            © 2026 Stizzy
         </div>
+
     </div>
 
 </body>
