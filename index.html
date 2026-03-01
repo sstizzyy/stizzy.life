@@ -1,37 +1,109 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>Stizzy - Coming Soon</title>
-  <style>
-    body {
-      margin: 0;
-      height: 100vh;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      background: linear-gradient(135deg, #111, #222);
-      color: white;
-      font-family: Arial, sans-serif;
-      text-align: center;
-    }
-    .box {
-      max-width: 600px;
-    }
-    h1 {
-      font-size: 42px;
-      margin-bottom: 20px;
-    }
-    p {
-      font-size: 18px;
-      opacity: 0.8;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <title>Service Temporarily Unavailable</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #0f172a, #1e293b);
+            color: #e2e8f0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+
+        .container {
+            max-width: 600px;
+            padding: 40px;
+        }
+
+        .status-icon {
+            font-size: 60px;
+            margin-bottom: 20px;
+            animation: pulse 2s infinite;
+        }
+
+        h1 {
+            font-weight: 600;
+            font-size: 32px;
+            margin-bottom: 15px;
+        }
+
+        p {
+            font-weight: 300;
+            font-size: 18px;
+            line-height: 1.6;
+            color: #cbd5e1;
+        }
+
+        .divider {
+            width: 60px;
+            height: 3px;
+            background: #38bdf8;
+            margin: 30px auto;
+            border-radius: 5px;
+        }
+
+        .footer {
+            margin-top: 40px;
+            font-size: 14px;
+            color: #94a3b8;
+        }
+
+        @keyframes pulse {
+            0% { opacity: 0.6; }
+            50% { opacity: 1; }
+            100% { opacity: 0.6; }
+        }
+
+        @media (max-width: 600px) {
+            h1 {
+                font-size: 26px;
+            }
+
+            p {
+                font-size: 16px;
+            }
+        }
+    </style>
 </head>
 <body>
-  <div class="box">
-    <h1>🚀 Stizzy is Launching Soon</h1>
-    <p>We're currently building something amazing.</p>
-    <p>Check back soon.</p>
-  </div>
+
+    <div class="container">
+        <div class="status-icon">⚙️</div>
+
+        <h1>We'll Be Back Shortly</h1>
+
+        <div class="divider"></div>
+
+        <p>
+            Our website is currently undergoing maintenance and is temporarily unavailable.  
+            We're working behind the scenes to restore full functionality as quickly as possible.
+        </p>
+
+        <p style="margin-top:15px;">
+            Please check back in a little while.  
+            We appreciate your patience and understanding.
+        </p>
+
+        <div class="footer">
+            © 2026 Your Company Name
+        </div>
+    </div>
+
 </body>
 </html>
