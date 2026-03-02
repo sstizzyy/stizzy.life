@@ -1,112 +1,326 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Service Unavailable</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Sign in — Stizzy</title>
+<style>
+  :root{
+    --bg:#f5f7fb;
+    --card:#ffffff;
+    --muted:#6b7280;
+    --primary:#0b66ff;
+    --danger:#e11d48;
+    --radius:12px;
+    --shadow: 0 6px 20px rgba(16,24,40,0.08);
+    --glass: linear-gradient(180deg, rgba(255,255,255,0.9), rgba(255,255,255,0.85));
+    font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  }
 
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  html,body{height:100%;}
+  body{
+    margin:0;
+    background: radial-gradient(1000px 500px at 10% 10%, #eaf2ff 0%, transparent 10%),
+                radial-gradient(800px 400px at 90% 90%, #fff6e6 0%, transparent 8%),
+                var(--bg);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:32px;
+    -webkit-font-smoothing:antialiased;
+    -moz-osx-font-smoothing:grayscale;
+  }
 
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+  .wrap{
+    width:100%;
+    max-width:960px;
+    display:grid;
+    grid-template-columns: 1fr 420px;
+    gap:36px;
+    align-items:center;
+  }
 
-        body {
-            font-family: 'Inter', sans-serif;
-            background: linear-gradient(135deg, #0f172a, #111827);
-            color: #e5e7eb;
-            height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
+  /* left hero */
+  .hero{
+    padding:34px;
+    color: #0f172a;
+  }
+  .brand {
+    display:flex;
+    gap:12px;
+    align-items:center;
+    margin-bottom:18px;
+  }
+  .logo {
+    width:56px;
+    height:56px;
+    border-radius:12px;
+    background:linear-gradient(135deg,var(--primary),#7c4dff);
+    box-shadow: 0 6px 18px rgba(11,102,255,0.12);
+    display:grid;
+    place-items:center;
+    color:white;
+    font-weight:700;
+    letter-spacing:0.6px;
+  }
+  .title{
+    font-size:28px;
+    font-weight:700;
+    margin:0 0 6px 0;
+  }
+  .subtitle{color:var(--muted); margin:0; font-size:15px; line-height:1.5;}
 
-        .wrapper {
-            text-align: center;
-            max-width: 600px;
-            padding: 40px;
-        }
+  /* card */
+  .card{
+    background: var(--card);
+    border-radius:var(--radius);
+    box-shadow:var(--shadow);
+    padding:28px;
+    position:relative;
+    min-height:320px;
+  }
 
-        .status-line {
-            width: 60px;
-            height: 3px;
-            background-color: #3b82f6;
-            margin: 0 auto 30px auto;
-            border-radius: 3px;
-        }
+  form{display:flex; flex-direction:column; gap:14px;}
+  label{font-size:13px; color:var(--muted);}
+  input[type="email"], input[type="password"]{
+    width:100%;
+    padding:12px 14px;
+    border-radius:10px;
+    border:1px solid #e6e9ef;
+    font-size:15px;
+    outline:none;
+    transition: box-shadow .12s, border-color .12s;
+    background:transparent;
+  }
+  input:focus{ border-color: rgba(11,102,255,0.24); box-shadow: 0 6px 18px rgba(11,102,255,0.06);}
 
-        h1 {
-            font-size: 32px;
-            font-weight: 600;
-            margin-bottom: 20px;
-        }
+  .row{display:flex; justify-content:space-between; align-items:center; gap:12px;}
+  .small{font-size:13px; color:var(--muted);}
 
-        p {
-            font-size: 17px;
-            font-weight: 300;
-            line-height: 1.6;
-            color: #cbd5e1;
-        }
+  .btn{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    gap:10px;
+    padding:12px 14px;
+    border-radius:10px;
+    border:0;
+    background:var(--primary);
+    color:#fff;
+    font-weight:600;
+    cursor:pointer;
+    font-size:15px;
+  }
+  .btn.secondary{ background:transparent; color:var(--primary); border:1px solid rgba(11,102,255,0.12); font-weight:600;}
 
-        .loader {
-            margin: 40px auto 0 auto;
-            width: 40px;
-            height: 40px;
-            border: 3px solid rgba(255, 255, 255, 0.1);
-            border-top: 3px solid #3b82f6;
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
-        }
+  .muted-link{ color:var(--primary); text-decoration:none; font-weight:600; font-size:13px; }
 
-        .footer {
-            margin-top: 50px;
-            font-size: 14px;
-            color: #9ca3af;
-        }
+  .footer { font-size:13px; color:var(--muted); margin-top:18px; }
 
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
+  /* server-down view */
+  .status{
+    display:none;
+    padding:28px;
+    text-align:center;
+  }
+  .status.active{ display:block; }
 
-        @media (max-width: 600px) {
-            h1 {
-                font-size: 26px;
-            }
+  .status h2{ margin:16px 0 8px; font-size:22px; }
+  .status p{ color:var(--muted); margin:0 0 18px; line-height:1.6; }
 
-            p {
-                font-size: 16px;
-            }
-        }
-    </style>
+  .notice {
+    border-radius:10px;
+    padding:14px;
+    background:linear-gradient(90deg, rgba(11,102,255,0.06), rgba(124,77,255,0.03));
+    border:1px solid rgba(11,66,153,0.06);
+    margin:12px 0 20px;
+    font-size:14px;
+    color:#073763;
+  }
+
+  .spinner{
+    width:18px;
+    height:18px;
+    border-radius:50%;
+    border:3px solid rgba(255,255,255,0.24);
+    border-top-color: rgba(255,255,255,0.9);
+    animation:spin 1s linear infinite;
+  }
+  @keyframes spin{to{transform:rotate(360deg)}}
+
+  /* responsive */
+  @media (max-width:960px){
+    .wrap{grid-template-columns:1fr; max-width:540px;}
+    .hero{order:2}
+  }
+</style>
 </head>
 <body>
+  <main class="wrap" aria-live="polite">
+    <section class="hero" aria-hidden="false">
+      <div class="brand">
+        <div class="logo">EX</div>
+        <div>
+          <div style="font-size:13px;color:var(--muted);font-weight:600">Example</div>
+          <div style="font-size:12px;color:var(--muted)">Secure access</div>
+        </div>
+      </div>
 
-    <div class="wrapper">
+      <h1 class="title">Sign in to your account</h1>
+      <p class="subtitle">Fast, secure sign-in for returning users. If you already have an account, just enter your email and password to continue.</p>
 
-        <div class="status-line"></div>
+      <div style="height:18px;"></div>
+      <div class="card" aria-hidden="true" style="display:none"></div>
+    </section>
 
-        <h1>Service Temporarily Unavailable</h1>
+    <section class="card" aria-labelledby="login-heading">
+      <h2 id="login-heading" style="margin:0 0 8px 0;font-size:20px">Welcome back</h2>
+      <p class="small" style="margin:0 0 18px 0">Sign in with your registered email to continue.</p>
 
-        <p>
-            Our website is currently offline due to scheduled maintenance.
-            We are working to restore full access as quickly and efficiently as possible.
-        </p>
-
-        <p style="margin-top:15px;">
-            Please check back shortly. Thank you for your patience.
-        </p>
-
-        <div class="loader"></div>
-
-        <div class="footer">
-            © 2026 Stizzy
+      <form id="loginForm" autocomplete="on" novalidate>
+        <div>
+          <label for="email">Email</label>
+          <input id="email" name="email" type="email" inputmode="email" placeholder="name@stizzy.life" required />
         </div>
 
-    </div>
+        <div>
+          <label for="password">Password</label>
+          <input id="password" name="password" type="password" placeholder="Enter your password" required />
+        </div>
 
+        <div class="row" style="margin-top:6px;">
+          <label class="small"><input type="checkbox" id="remember" /> <span style="vertical-align:middle">Remember me</span></label>
+          <a class="muted-link" href="#" onclick="alert('If you forgot your password, contact support.');return false;">Forgot password?</a>
+        </div>
+
+        <div style="display:flex; gap:10px; margin-top:10px;">
+          <button type="submit" class="btn" id="signInBtn">
+            <span id="btnText">Sign in</span>
+            <span class="spinner" id="spinner" style="display:none"></span>
+          </button>
+          <button type="button" class="btn secondary" id="helpBtn">Need help?</button>
+        </div>
+
+        <div class="footer">
+          <small>Not your device? Use a private window to sign in.</small>
+        </div>
+      </form>
+
+      <!-- server-down view (hidden by default) -->
+      <div id="statusView" class="status" role="status" aria-hidden="true">
+        <div style="display:flex;justify-content:center">
+          <svg width="72" height="72" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <path d="M12 2a10 10 0 100 20 10 10 0 000-20zm1 7h-2v6h2V9zm0 8h-2v2h2v-2z" fill="#ffb020"/>
+          </svg>
+        </div>
+        <h2>Temporary service interruption</h2>
+        <p class="notice" id="statusNotice" role="note">
+          Our authentication system is currently undergoing maintenance. Your account is safe — sign-ins are paused while we complete essential updates.
+        </p>
+        <p id="statusText">We’re working to restore secure access. Please try again shortly. If you need help now, contact <a href="mailto:support@example.com" class="muted-link">support@example.com</a>.</p>
+        <div style="margin-top:18px;">
+          <button class="btn secondary" id="backBtn">Return to sign in</button>
+        </div>
+      </div>
+
+    </section>
+  </main>
+
+<script>
+(function(){
+  const form = document.getElementById('loginForm');
+  const signInBtn = document.getElementById('signInBtn');
+  const btnText = document.getElementById('btnText');
+  const spinner = document.getElementById('spinner');
+  const statusView = document.getElementById('statusView');
+  const backBtn = document.getElementById('backBtn');
+  const statusNotice = document.getElementById('statusNotice');
+
+  // Helper to show "server down" view
+  function showServerDown(email){
+    // Avoid showing any password or saving credentials.
+    history.pushState({page:'status'}, '', '/status'); // updates URL to look like a new page (works only client-side)
+    // Personalize text slightly (only show first part of email for privacy)
+    let display = '';
+    if(email){
+      const parts = email.split('@');
+      display = parts[0].length > 10 ? parts[0].slice(0,10) + '...' : parts[0];
+      statusNotice.innerHTML = `Hello <strong>${escapeHtml(display)}</strong> — our authentication servers are temporarily offline while we complete scheduled maintenance.`;
+    }
+
+    // swap views
+    form.style.display = 'none';
+    statusView.classList.add('active');
+    statusView.setAttribute('aria-hidden','false');
+  }
+
+  // Return to login view
+  function showLogin(){
+    history.pushState({}, '', '/');
+    form.style.display = '';
+    statusView.classList.remove('active');
+    statusView.setAttribute('aria-hidden','true');
+  }
+
+  // simple client-side validation and UX
+  form.addEventListener('submit', function(e){
+    e.preventDefault();
+    const email = document.getElementById('email').value.trim();
+    const pwd = document.getElementById('password').value;
+
+    if(!email || !pwd){
+      alert('Please enter both email and password.');
+      return;
+    }
+
+    // show loading state (purely local; nothing is sent to a server)
+    btnText.style.display = 'none';
+    spinner.style.display = 'inline-block';
+    signInBtn.disabled = true;
+
+    // fake "connecting" then show server-down page
+    setTimeout(() => {
+      // clear sensitive fields from memory immediately
+      document.getElementById('password').value = '';
+      signInBtn.disabled = false;
+      btnText.style.display = '';
+      spinner.style.display = 'none';
+
+      showServerDown(email);
+    }, 1200);
+  });
+
+  backBtn.addEventListener('click', function(){
+    showLogin();
+  });
+
+  // prevent accidentally sending passwords anywhere — nothing is posted.
+  // The script never sends data off the page.
+  // Utility: escape text for HTML insertion
+  function escapeHtml(s){
+    return String(s).replace(/[&<>"']/g, function(m){
+      return ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]);
+    });
+  }
+
+  // handle browser navigation (back button)
+  window.addEventListener('popstate', (ev) => {
+    if(ev.state && ev.state.page === 'status'){
+      // keep status view
+      form.style.display = 'none';
+      statusView.classList.add('active');
+      statusView.setAttribute('aria-hidden','false');
+    } else {
+      showLogin();
+    }
+  });
+
+  // small helper for "Need help?"
+  document.getElementById('helpBtn').addEventListener('click', function(){
+    window.location.href = 'mailto:support@example.com';
+  });
+
+})();
+</script>
 </body>
 </html>
