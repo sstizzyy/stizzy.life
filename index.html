@@ -1,410 +1,270 @@
 <!doctype html>
 <html lang="en">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width,initial-scale=1" />
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Sign in — Stizzy</title>
-<meta name="theme-color" content="#0b66ff" />
+
 <style>
-  :root{
-    --bg:#f5f7fb;
-    --card:#ffffff;
-    --muted:#6b7280;
-    --primary:#0b66ff;
-    --danger:#e11d48;
-    --radius:12px;
-    --shadow: 0 6px 20px rgba(16,24,40,0.08);
-    --glass: linear-gradient(180deg, rgba(255,255,255,0.9), rgba(255,255,255,0.85));
-    --max-content-width:1120px;
-    --gap:28px;
-    font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-    -webkit-font-smoothing:antialiased;
-    -moz-osx-font-smoothing:grayscale;
-  }
+:root{
+  --bg:#000;
+  --card:rgba(18,18,18,0.92);
+  --border:rgba(255,255,255,0.08);
+  --text:#fff;
+  --muted:#9ca3af;
+  --radius:22px;
+  --blur:40px;
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+}
 
-  :focus-visible { outline: 3px solid rgba(11,102,255,0.14); outline-offset: 2px; border-radius:8px; }
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+}
 
-  html,body{height:100%;}
-  body{
-    margin:0;
-    background:
-      radial-gradient(1000px 500px at 10% 10%, #eaf2ff 0%, transparent 10%),
-      radial-gradient(800px 400px at 90% 90%, #fff6e6 0%, transparent 8%),
-      var(--bg);
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    padding:28px;
-    box-sizing:border-box;
-    -webkit-tap-highlight-color: rgba(0,0,0,0);
-    touch-action: manipulation;
-  }
+body{
+  min-height:100vh;
+  background:radial-gradient(circle at 30% 30%, #1a1a1a 0%, #000 55%);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:24px;
+  color:var(--text);
+}
 
-  .container{
-    width:100%;
-    max-width:var(--max-content-width);
-    margin:0 auto;
-    padding:18px;
-    box-sizing:border-box;
-  }
+/* Card */
+.card{
+  width:100%;
+  max-width:420px;
+  background:var(--card);
+  backdrop-filter:blur(var(--blur));
+  border:1px solid var(--border);
+  border-radius:var(--radius);
+  padding:42px 32px;
+  box-shadow:0 40px 80px rgba(0,0,0,0.7);
+}
 
-  .wrap{
-    display:grid;
-    grid-template-columns: 1fr minmax(320px, 420px);
-    gap:var(--gap);
-    align-items:center;
-  }
+/* Title */
+.card h1{
+  font-size:24px;
+  font-weight:600;
+  text-align:center;
+  margin-bottom:34px;
+  letter-spacing:-0.3px;
+}
 
-  /* Make hero and card stack naturally on small screens */
-  @media (max-width:900px){
-    .wrap{
-      grid-template-columns: 1fr;
-    }
-    .hero{order:2}
-    .card-section{order:1}
-  }
+/* Form */
+form{
+  display:flex;
+  flex-direction:column;
+  gap:22px;
+}
 
-  /* left hero */
-  .hero{
-    padding:28px;
-    color: #0f172a;
-  }
-  .brand {
-    display:flex;
-    gap:12px;
-    align-items:center;
-    margin-bottom:18px;
-  }
-  .logo {
-    width:56px;
-    height:56px;
-    min-width:56px;
-    border-radius:12px;
-    background:linear-gradient(135deg,var(--primary),#7c4dff);
-    box-shadow: 0 6px 18px rgba(11,102,255,0.12);
-    display:grid;
-    place-items:center;
-    color:white;
-    font-weight:700;
-    letter-spacing:0.6px;
-    font-size:20px;
-  }
-  .title{
-    font-size:28px;
-    font-weight:700;
-    margin:0 0 6px 0;
-  }
-  .subtitle{color:var(--muted); margin:0; font-size:15px; line-height:1.5;}
+label{
+  font-size:13px;
+  color:var(--muted);
+  margin-bottom:6px;
+  display:block;
+}
 
-  /* card */
-  .card{
-    background: var(--card);
-    border-radius:var(--radius);
-    box-shadow:var(--shadow);
-    padding:22px;
-    position:relative;
-    min-height:260px;
-    box-sizing:border-box;
+input[type="email"],
+input[type="password"]{
+  width:100%;
+  padding:16px;
+  border-radius:14px;
+  border:1px solid var(--border);
+  background:#0f0f0f;
+  color:#fff;
+  font-size:15px;
+  transition:all .25s ease;
+}
+
+input:focus{
+  outline:none;
+  border-color:#ffffff40;
+  background:#151515;
+}
+
+/* Options Row */
+.options{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:12px;
+  flex-wrap:wrap;
+  margin-top:-4px;
+}
+
+.remember{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  font-size:13px;
+  color:var(--muted);
+  cursor:pointer;
+}
+
+.remember input{
+  width:16px;
+  height:16px;
+  accent-color:#ffffff;
+  cursor:pointer;
+}
+
+.forgot{
+  font-size:13px;
+  color:var(--muted);
+  text-decoration:none;
+  transition:opacity .2s ease;
+}
+
+.forgot:hover{
+  opacity:0.7;
+}
+
+/* Stack cleanly on very small screens */
+@media(max-width:420px){
+  .options{
+    flex-direction:column;
+    align-items:flex-start;
+    gap:10px;
   }
+}
 
-  form{display:flex; flex-direction:column; gap:12px;}
-  label{font-size:13px; color:var(--muted); display:block; margin-bottom:6px;}
-  input[type="email"], input[type="password"]{
-    width:100%;
-    padding:14px 14px;
-    border-radius:10px;
-    border:1px solid #e6e9ef;
-    font-size:15px;
-    outline:none;
-    transition: box-shadow .12s, border-color .12s;
-    background:transparent;
-    box-sizing:border-box;
-    -webkit-appearance:none;
-  }
-  input[type="email"]::placeholder, input[type="password"]::placeholder { color: #c7cbd6; }
-  input:focus{ border-color: rgba(11,102,255,0.24); box-shadow: 0 6px 18px rgba(11,102,255,0.06);}
+/* Buttons */
+.actions{
+  display:flex;
+  flex-direction:column;
+  gap:14px;
+  margin-top:8px;
+}
 
-  .row{display:flex; justify-content:space-between; align-items:center; gap:12px;}
-  .small{font-size:13px; color:var(--muted);}
+button{
+  padding:16px;
+  border-radius:14px;
+  border:none;
+  font-size:15px;
+  font-weight:600;
+  cursor:pointer;
+  transition:all .25s ease;
+}
 
+.primary{
+  background:#fff;
+  color:#000;
+}
+
+.primary:hover{
+  background:#e5e5e5;
+}
+
+.secondary{
+  background:transparent;
+  border:1px solid var(--border);
+  color:#fff;
+}
+
+.secondary:hover{
+  background:#111;
+}
+
+/* Desktop button alignment */
+@media(min-width:600px){
   .actions{
-    display:flex;
-    gap:10px;
-    margin-top:8px;
-    align-items:center;
+    flex-direction:row;
   }
-
-  .btn{
-    display:inline-flex;
-    align-items:center;
-    justify-content:center;
-    gap:10px;
-    padding:12px 14px;
-    border-radius:10px;
-    border:0;
-    background:var(--primary);
-    color:#fff;
-    font-weight:600;
-    cursor:pointer;
-    font-size:15px;
-    min-height:44px;
+  .actions button{
+    flex:1;
   }
-  .btn.secondary{ background:transparent; color:var(--primary); border:1px solid rgba(11,102,255,0.12); font-weight:600;}
+}
 
-  /* On small screens stack actions and make full width for tappability */
-  @media (max-width:520px){
-    .actions{flex-direction:column-reverse; align-items:stretch;}
-    .btn, .btn.secondary{ width:100%; }
-  }
+/* Status Screen */
+.status{
+  display:none;
+  text-align:center;
+}
 
-  .muted-link{ color:var(--primary); text-decoration:none; font-weight:600; font-size:13px; }
+.status.active{
+  display:block;
+}
 
-  .footer { font-size:13px; color:var(--muted); margin-top:12px; }
+.status h2{
+  font-size:22px;
+  margin-bottom:18px;
+  font-weight:500;
+}
 
-  /* server-down view */
-  .status{
-    display:none;
-    padding:18px;
-    text-align:center;
-  }
-  .status.active{ display:block; }
-
-  .status h2{ margin:16px 0 8px; font-size:20px; }
-  .status p{ color:var(--muted); margin:0 0 18px; line-height:1.6; }
-
-  .notice {
-    border-radius:10px;
-    padding:12px;
-    background:linear-gradient(90deg, rgba(11,102,255,0.06), rgba(124,77,255,0.03));
-    border:1px solid rgba(11,66,153,0.06);
-    margin:12px 0 16px;
-    font-size:14px;
-    color:#073763;
-  }
-
-  .spinner{
-    width:18px;
-    height:18px;
-    border-radius:50%;
-    border:3px solid rgba(255,255,255,0.24);
-    border-top-color: rgba(255,255,255,0.9);
-    animation:spin 1s linear infinite;
-  }
-  @keyframes spin{to{transform:rotate(360deg)}}
-
-  /* small utility */
-  .sr-only{ position:absolute; left:-9999px; top:auto; width:1px; height:1px; overflow:hidden; }
-  .helper{ font-size:13px; color:var(--muted); }
-
-  /* NoScript visible hint */
-  noscript .no-js-message{ display:block; background:#fff6f6; border:1px solid #ffd6d6; color:#7a1f1f; padding:10px 12px; border-radius:8px; margin-bottom:12px;}
-  .no-js-message{ display:none; }
-
+.notice{
+  padding:18px;
+  border-radius:16px;
+  background:#111;
+  border:1px solid var(--border);
+  color:var(--muted);
+  margin-bottom:22px;
+  line-height:1.5;
+}
 </style>
 </head>
+
 <body>
-  <div class="container">
-    <noscript><div class="no-js-message">JavaScript is disabled in your browser. This page requires JavaScript for the best experience.</div></noscript>
 
-    <main class="wrap" aria-live="polite">
-      <section class="hero" aria-hidden="false">
-        <div class="brand">
-          <div class="logo" aria-hidden="true">S</div>
-          <div>
-            <div style="font-size:13px;color:var(--muted);font-weight:600">Stizzy</div>
-            <div style="font-size:12px;color:var(--muted)">Secure access</div>
-          </div>
-        </div>
+<div class="card">
 
-        <h1 class="title">Sign in to your account</h1>
-        <p class="subtitle">Fast, secure sign-in for returning users. If you already have an account, just enter your email and password to continue.</p>
-      </section>
+  <form id="loginForm">
+    <h1>Sign In</h1>
 
-      <section class="card card-section" aria-labelledby="login-heading">
-        <h2 id="login-heading" style="margin:0 0 8px 0;font-size:20px">Welcome back</h2>
-        <p class="helper" style="margin:0 0 14px 0">Sign in with your registered email to continue.</p>
+    <div>
+      <label for="email">Email</label>
+      <input type="email" id="email" placeholder="name@stizzy.life" required>
+    </div>
 
-        <form id="loginForm" autocomplete="on" novalidate>
-          <div>
-            <label for="email">Email</label>
-            <input id="email" name="email" type="email" inputmode="email" placeholder="name@stizzy.life" required autocomplete="email" />
-          </div>
+    <div>
+      <label for="password">Password</label>
+      <input type="password" id="password" placeholder="Enter your password" required>
+    </div>
 
-          <div>
-            <label for="password">Password</label>
-            <input id="password" name="password" type="password" placeholder="Enter your password" required autocomplete="current-password" />
-          </div>
+    <div class="options">
+      <label class="remember">
+        <input type="checkbox" id="remember">
+        <span>Remember me</span>
+      </label>
 
-          <div class="row" style="margin-top:6px;">
-            <label class="small" for="remember"><input type="checkbox" id="remember" /> <span style="vertical-align:middle">Remember me</span></label>
-            <a class="muted-link" href="#" id="forgotLink">Forgot password?</a>
-          </div>
+      <a href="#" class="forgot">Forgot password?</a>
+    </div>
 
-          <div class="actions" aria-hidden="false">
-            <button type="submit" class="btn" id="signInBtn" aria-label="Sign in">
-              <span id="btnText">Sign in</span>
-              <span class="spinner" id="spinner" style="display:none" aria-hidden="true"></span>
-            </button>
-            <button type="button" class="btn secondary" id="helpBtn" aria-label="Need help?">Need help?</button>
-          </div>
+    <div class="actions">
+      <button type="submit" class="primary">Sign In</button>
+      <button type="button" class="secondary">Need Help?</button>
+    </div>
+  </form>
 
-          <div class="footer" style="margin-top:10px;">
-            <small>Not your device? Use a private window to sign in.</small>
-          </div>
-        </form>
-
-        <!-- server-down view (hidden by default) -->
-        <div id="statusView" class="status" role="status" aria-hidden="true" aria-live="polite">
-          <div style="display:flex;justify-content:center">
-            <svg width="72" height="72" viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false">
-              <path d="M12 2a10 10 0 100 20 10 10 0 000-20zm1 7h-2v6h2V9zm0 8h-2v2h2v-2z" fill="#ffb020"/>
-            </svg>
-          </div>
-          <h2>Temporary service interruption</h2>
-          <p class="notice" id="statusNotice" role="note">
-            Our authentication system is currently undergoing maintenance. Your account is safe — sign-ins are paused while we complete essential updates.
-          </p>
-          <p id="statusText">We’re working to restore secure access as quickly as possible. Please try again later. If you need immediate assistance, contact <a href="mailto:support@example.com" class="muted-link" id="supportLink">support@example.com</a>.</p>
-          <div style="margin-top:18px;">
-            <button class="btn secondary" id="backBtn">Return to sign in</button>
-          </div>
-        </div>
-
-      </section>
-    </main>
+  <!-- Status Redirect -->
+  <div id="statusPage" class="status">
+    <h2>Service Temporarily Unavailable</h2>
+    <div class="notice">
+      Our authentication system is currently undergoing scheduled maintenance.
+      Your account remains secure and protected during this time.
+    </div>
+    <p>Please try again shortly.</p>
+    <div style="margin-top:22px;">
+      <button class="secondary" onclick="location.reload()">Return</button>
+    </div>
   </div>
 
+</div>
+
 <script>
-(function(){
-  // quick configuration — update as needed
-  const SUPPORT_EMAIL = 'support@example.com'; // <-- change to your support email
-  const STATUS_PATH = '/status';               // client-side path used for pushState
-  // Elements
-  const form = document.getElementById('loginForm');
-  const signInBtn = document.getElementById('signInBtn');
-  const btnText = document.getElementById('btnText');
-  const spinner = document.getElementById('spinner');
-  const statusView = document.getElementById('statusView');
-  const backBtn = document.getElementById('backBtn');
-  const statusNotice = document.getElementById('statusNotice');
-  const supportLink = document.getElementById('supportLink');
-  const forgotLink = document.getElementById('forgotLink');
-  const helpBtn = document.getElementById('helpBtn');
+const form = document.getElementById("loginForm");
+const statusPage = document.getElementById("statusPage");
 
-  // apply support email into the DOM
-  if(supportLink) supportLink.href = 'mailto:' + SUPPORT_EMAIL;
-  if(forgotLink) forgotLink.addEventListener('click', (e) => { e.preventDefault(); alert('If you forgot your password, please contact ' + SUPPORT_EMAIL); });
-
-  // Helper to show "server down" view
-  function showServerDown(email){
-    // Avoid showing any password or saving credentials.
-    try {
-      history.pushState({page:'status'}, '', STATUS_PATH);
-    } catch(e){ /* some browsers or file:// may not allow pushState; ignore */ }
-
-    // Personalize text slightly (only show first part of email for privacy)
-    let display = '';
-    if(email){
-      const parts = email.split('@');
-      display = parts[0].length > 10 ? parts[0].slice(0,10) + '...' : parts[0];
-      statusNotice.innerHTML = `Hello <strong>${escapeHtml(display)}</strong> — our authentication servers are temporarily offline while we complete scheduled maintenance.`;
-    } else {
-      statusNotice.innerHTML = `Our authentication servers are temporarily offline while we complete scheduled maintenance.`;
-    }
-
-    // swap views
-    form.style.display = 'none';
-    statusView.classList.add('active');
-    statusView.setAttribute('aria-hidden','false');
-
-    // Move focus for screen reader users (keeps experience accessible)
-    const firstInteractive = statusView.querySelector('button, a, [tabindex]');
-    if(firstInteractive) firstInteractive.focus();
-  }
-
-  // Return to login view
-  function showLogin(){
-    try {
-      history.pushState({}, '', '/');
-    } catch(e) {}
-    form.style.display = '';
-    statusView.classList.remove('active');
-    statusView.setAttribute('aria-hidden','true');
-
-    // restore focus to first input for quick keyboard access
-    const emailInput = document.getElementById('email');
-    if(emailInput) emailInput.focus();
-  }
-
-  // client-side validation and UX
-  form.addEventListener('submit', function(e){
-    e.preventDefault();
-    const email = document.getElementById('email').value.trim();
-    const pwd = document.getElementById('password').value;
-
-    if(!email || !pwd){
-      // Use a friendly inline validation rather than blocking alert on mobile
-      alert('Please enter both email and password.');
-      const missing = !email ? document.getElementById('email') : document.getElementById('password');
-      if(missing) missing.focus();
-      return;
-    }
-
-    // show loading state (purely local; nothing is sent to a server)
-    btnText.style.display = 'none';
-    spinner.style.display = 'inline-block';
-    signInBtn.disabled = true;
-
-    // simulate a short network handshake then display 'server down'
-    setTimeout(() => {
-      // clear sensitive fields from memory immediately
-      document.getElementById('password').value = '';
-      signInBtn.disabled = false;
-      btnText.style.display = '';
-      spinner.style.display = 'none';
-      showServerDown(email);
-    }, 900); // slightly faster on mobile feel
-  });
-
-  backBtn.addEventListener('click', function(){
-    showLogin();
-  });
-
-  // utility: escape text for HTML insertion
-  function escapeHtml(s){
-    return String(s).replace(/[&<>"']/g, function(m){
-      return ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]);
-    });
-  }
-
-  // handle browser navigation (back button) — keep view consistent with history
-  window.addEventListener('popstate', (ev) => {
-    if(ev.state && ev.state.page === 'status'){
-      form.style.display = 'none';
-      statusView.classList.add('active');
-      statusView.setAttribute('aria-hidden','false');
-    } else {
-      showLogin();
-    }
-  });
-
-  // small helper for "Need help?"
-  helpBtn.addEventListener('click', function(){
-    // open mail client; fallback to alert if popups blocked
-    try {
-      window.location.href = 'mailto:' + SUPPORT_EMAIL;
-    } catch(e){
-      alert('Please contact ' + SUPPORT_EMAIL);
-    }
-  });
-
-  // Set initial focus to email for keyboard users
-  (function setInitialFocus(){
-    const emailInput = document.getElementById('email');
-    if(emailInput) emailInput.focus();
-  })();
-
-})();
+form.addEventListener("submit", function(e){
+  e.preventDefault();
+  document.getElementById("password").value = "";
+  form.style.display = "none";
+  statusPage.classList.add("active");
+});
 </script>
+
 </body>
 </html>
